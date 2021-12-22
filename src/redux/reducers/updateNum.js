@@ -1,6 +1,6 @@
 const initialState = 0;
 
-const UpdateNUm = (state = initialState, action) => {
+const UpdateNum = (state = initialState, action) => {
     switch (action.type) {
         case "Increase": return state + action.payload;
         case "Decrease": return state - 1;
@@ -8,4 +8,4 @@ const UpdateNUm = (state = initialState, action) => {
     }
 
 }
-export default UpdateNUm;
+export default UpdateNum;
