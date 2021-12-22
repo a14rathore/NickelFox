@@ -14,7 +14,6 @@ export default function Counter() {
                 <button style={btn} onClick={() => { dispatch.increaseNum() }}>+</button>
                 <h4 style={{ padding: '5px', margin: '5px', fontSize: '2pc' }}>{myval}</h4>
                 <button style={btn} onClick={() => { dispatch.decreaseNum() }}>-</button>
-
             </div>
 
         </div>
