@@ -24,19 +24,36 @@ const SignUp = () => {
   }
   const setDataToLocalStoragre = (e) => {
     e.preventDefault();
+    let Check = false;
+    let Check_email = JSON.parse(localStorage.getItem("list"));
+    // console.log(Check_email.length === 0);
     (data.Name && data.Password && data.RePassword && data["phone No"] && data.Email) ?
       (
-        setArray([...array, data]),
-        setdata({
-          Name: "",
-          Email: "",
-          "phone No": "",
-          Password: "",
-          RePassword: "",
-        })
+        Check_email = Check_email.length === 0 ? [{ Email: undefined }] : JSON.parse(localStorage.getItem("list")),
+        Check_email.map((ele) => {
+          if (ele.Email === data.Email) {
+            Check = true;
+            return alert("Email id already Exist");
+          }
+        }),
+        !Check ? (
+          setArray([...array, data]),
+          setdata({
+            Name: "",
+            Email: "",
+            "phone No": "",
+            Password: "",
+            RePassword: "",
+          }),
+          alert("SucessFull SIgnUP"),
+          setTimeout(() => { window.location.pathname = "auth/login" }, 1000)
+
+        ) : ""
+
       )
       : alert("cant be Empty")
   }
+
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(array))
   })
