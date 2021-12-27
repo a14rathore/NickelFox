@@ -5,7 +5,6 @@ import PrivateLayout from "../layout/privateLayout";
 
 const AuthWrapper = ({ component: Component, ...rest }) => {
   const { isLogged } = useSelector((state) => state.app);
-
   return (
     <Route
       {...rest}
