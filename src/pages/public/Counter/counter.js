@@ -12,7 +12,7 @@ export default function Counter() {
         <div style={{ display: 'block', height: '200px', width: '200px', margin: 'auto' }}>
             <div style={{ display: 'flex', justifyContent: 'centre' }}>
                 <button style={btn} onClick={() => { dispatch.increaseNum() }}>+</button>
-                <h4 style={{ padding: '5px', margin: '5px', fontSize: '2pc' }}>{myval}</h4>
+                <h4 style={{ padding: '5px', margin: '5px', fontSize: '2pc' }}>{myval.val}</h4>
                 <button style={btn} onClick={() => { dispatch.decreaseNum() }}>-</button>
             </div>
 

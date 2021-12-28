@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import AppDispatcher from "@redux/dispatchers/appDispatcher";
 import { styled } from '@mui/material/styles';
@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 function Dashboard() {
+  const [imgs, setimg] = useState([])
   const logout = () => {
     AppDispatcher.setUserLoggedOut();
     window.location.pathname = "/auth/login";
@@ -16,35 +17,43 @@ function Dashboard() {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
-  let photos = "";
-  fetch("https://picsum.photos/200/300")
-    .then((res) => { photos = res.url; console.log(photos) }).catch((err) => (console.log(err)))
+  let photos = process.env.REACT_APP_API_URL
+  useEffect(() => {
+    fetch(photos)
+      .then((res) => res.json()).then((data) => { setimg(data); console.log(data) })
+  }, [])
+
   return (
-    <div>
+    <>
       <h1>Dashboard</h1>
 
-      <Button variant="contained" onClick={logout}>Hello World</Button>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <Item>xs=8</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item> <img src={photos} alt="photo" /></Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>xs=4</Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>xs=8</Item>
-          </Grid>
-        </Grid>
-      </Box>
+      <Button variant="contained" onClick={logout}>Logout</Button>
 
 
+      <div >
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
 
-    </div>
-  );
+            {
+              imgs.map((ele) => {
+                return (
+                  <Grid key={ele.id} item xs={2}>
+                    <Item >
+
+                      <img style={{ height: "300px", width: "300px" }} src={ele.download_url} />
+                      <p>{ele.author}</p>
+                    </Item>
+                  </Grid>
+                )
+              })
+
+            }
+          </Grid>
+        </Box>
+      </div>
+    </>
+
+  )
 }
 
 export default Dashboard;
