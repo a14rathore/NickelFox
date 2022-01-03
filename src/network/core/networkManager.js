@@ -1,9 +1,9 @@
 // Higher Order Class to make all network calls
-import { Stores } from "@redux";
-import { HTTP_METHODS } from "./HttpMethods";
-import { ServerConfig } from "./ServerConfig";
-import { Response } from "./ResponseParser";
-import { refreshToken } from "./TokenRefresher";
+import { Store } from "@redux";
+import { HTTP_METHODS } from "./httpMethods";
+import { ServerConfig } from "./serverConfig";
+import { Response } from "./responseParser";
+import { refreshToken } from "./tokenRefresher";
 
 // ********************
 // Create a new instance of this Network class and make api call
@@ -37,11 +37,12 @@ export class NetworkManager {
     let data = [];
     let success = false;
     let code = 200;
-    const state = Stores.getState().app;
+    const state = Store.getState().app;
+    // console.log(this.baseUrl);
 
     try {
       const url = `${this.baseUrl}/${this.endPointVersion}${this.endpoint}${this.requestParams}`;
-
+      // console.log(url);
       const options = {
         method: this.method,
       };
@@ -60,11 +61,16 @@ export class NetworkManager {
       // execute fetch call & parse json response
       const res = await fetch(url, options);
       const response = await res.json();
-
-      data = response.data;
+      // console.log(response)
+      data = response;
+      // console.log(data)
       success = response.success;
+      // console.log(success)
       code = response.status_code;
+      // console.log(code)
       error = response.error;
+      // console.log(error)
+
 
       if (code === 401) {
         // refresh the token

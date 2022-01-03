@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AppDispatcher from "@redux/dispatchers/appDispatcher";
+import style from "../signup/signUp.module.css"
 
 
 const Login = () => {
@@ -29,15 +30,15 @@ const Login = () => {
 
   return (
     <div>
-      <form className="form" onSubmit={getDataFromLocalStorage}>
+      <form className={style.form} onSubmit={getDataFromLocalStorage}>
         <h1>Login Here</h1>
-        <div className="filled_div">
+        <div className={style.filled_div}>
           <label>UserName(Email)</label>
           <input type="email" required placeholder="UserName" value={logindata.UserName} onChange={inputHandler}></input>
           <label>Password</label>
           <input type="password" required placeholder="Password" value={logindata.Password} onChange={inputHandler}></input>
-          <button className="Btn" type="onSubmit">Login</button>
-          <a className="Btn" href="/auth/signup">SignUp</a>
+          <button className={style.Btn} type="onSubmit">Login</button>
+          <a className={style.Btn} href="/auth/signup">SignUp</a>
         </div>
 
       </form>
