@@ -6,21 +6,33 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 function Dashboard() {
-  const [imgs, setimg] = useState([])
+  const [state, setState] = useState({
+    loading: false,
+    imgs: []
+  })
+
   const logout = () => {
     AppDispatcher.setUserLoggedOut();
     window.location.pathname = "/auth/login";
   }
+
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
+
   let photos = process.env.REACT_APP_API_URL
-  useEffect(() => {
-    fetch(photos)
-      .then((res) => res.json()).then((data) => { setimg(data); console.log(data) })
+
+  useEffect(async () => {
+    setState({ ...state, loading: true })
+    const data = await fetch(photos)
+    const parseData = await data.json();
+    setState({
+      loading: false,
+      imgs: parseData
+    })
   }, [])
 
   return (
@@ -32,12 +44,13 @@ function Dashboard() {
 
       <div >
         <Box sx={{ flexGrow: 1 }}>
+          {state.loading && <h1>Loading......</h1>}
           <Grid container spacing={2}>
 
             {
-              imgs.map((ele) => {
+              state.imgs.map((ele) => {
                 return (
-                  <Grid key={ele.id} item xs={2}>
+                  <Grid key={ele.id} item xs={2} sm={12}>
                     <Item >
 
                       <img style={{ height: "300px", width: "300px" }} src={ele.download_url} />
