@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap');
+.form{
+    display:block;
+    margin: auto;
+    height: 600px;
+    width: 700px;
+    text-align: center;
+    font-family: 'Exo 2', sans-serif;
+}
+.filled_div{
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+.label{
+    font-weight: bold;
+    padding: 3px;
+}
+input{
+    border-radius: 2pc;
+    margin: 5px;
+}
+.Btn{
+    border-radius: 3px;
+    margin-top: 10px;
+    width: 5pc;
+    height: 2.5pc;
+}
+p{
+    color: red;
+    font-weight: bold;
+    background-color: yellow;
+    border-radius: 1pc;
+    padding : 5px;
+
+}
