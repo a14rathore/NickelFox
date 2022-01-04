@@ -17,35 +17,31 @@ const Login = () => {
   }
   const getDataFromLocalStorage = () => {
     const LocalStoragedata = JSON.parse(localStorage.getItem("list"));
-    LocalStoragedata.map((ele) => {
-      if (ele.Email === logindata.UserName && ele.Password === logindata.Password) {
-        alert("login Successful")
-        AppDispatcher.updateUserTokens();
-        window.location.path = "/u/dashboard"
+    if (LocalStoragedata[logindata.UserName] && LocalStoragedata[logindata.UserName].Password === logindata.Password) {
+      alert("user Logged in")
+      AppDispatcher.updateUserTokens();
 
-      }
-    })
-  }
-  const signup = () => {
-    alert("signUp");
-    window.location.path = "/auth/signup"
+    } else {
+      alert("Please SignUp First");
+    }
+
   }
 
   return (
     <div>
-      <form className="form">
+      <form className="form" onSubmit={getDataFromLocalStorage}>
         <h1>Login Here</h1>
         <div className="filled_div">
           <label>UserName(Email)</label>
-          <input type="email" placeholder="UserName" value={logindata.UserName} onChange={inputHandler}></input>
+          <input type="email" required placeholder="UserName" value={logindata.UserName} onChange={inputHandler}></input>
           <label>Password</label>
-          <input type="password" placeholder="Password" value={logindata.Password} onChange={inputHandler}></input>
-          <button className="Btn" onClick={getDataFromLocalStorage}>Login</button>
-          <button className="Btn" onClick={signup}>SignUp</button>
+          <input type="password" required placeholder="Password" value={logindata.Password} onChange={inputHandler}></input>
+          <button className="Btn" type="onSubmit">Login</button>
+          <a className="Btn" href="/auth/signup">SignUp</a>
         </div>
 
       </form>
-    </div>
+    </div >
   );
 };
 

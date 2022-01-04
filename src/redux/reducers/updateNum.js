@@ -1,9 +1,12 @@
-const initialState = 0;
+
+const initialState = {
+    val: 0
+};
 
 const UpdateNum = (state = initialState, action) => {
     switch (action.type) {
-        case "Increase": return state + action.payload;
-        case "Decrease": return state - 2;
+        case "Increase": return { val: state.val + action.payload };
+        case "Decrease": return { val: state.val - 2 };
         default: return state;
     }
 

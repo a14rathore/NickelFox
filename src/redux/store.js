@@ -6,12 +6,12 @@ import UpdateNum from "./reducers/updateNum";
 const PersistConfig = {
   key: "root",
   storage,
-  whitelist: ["app"]
+  whitelist: ["app", "UpdateNum"]
 };
 
 const AllReducer = {
   app: AppReducer,
-  UpdateNum,
+  UpdateNum: UpdateNum,
 };
 
 const rootReducer = combineReducers(AllReducer);
