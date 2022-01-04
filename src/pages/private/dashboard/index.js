@@ -13,9 +13,11 @@ function Dashboard() {
     photos: []
   })
 
-  const instanceOfNetwork = new NetworkManager(API.AUTH.LOGIN)
+  const instanceOfNetwork = new NetworkManager(API.PRIVATE.GALLARY)
   instanceOfNetwork.httpRequest(true)
-    .then((res) => res.data).then((data) => { setdata({ loading: false, photos: data }) })
+    .then((res) => res.data)
+    .then((data) => { setdata({ loading: false, photos: data }) })
+    .catch((err) => { console.log(err) })
 
   const logout = () => {
     AppDispatcher.setUserLoggedOut();
@@ -28,17 +30,6 @@ function Dashboard() {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
-
-  // let photos = process.env.REACT_APP_API_URL
-  // useEffect(async () => {
-  //   setState({ ...state, loading: true })
-  //   const data = await fetch(photos)
-  //   const parseData = await data.json();
-  //   setState({
-  //     loading: false,
-  //     imgs: parseData
-  //   })
-  // }, [])
 
   return (
     <>

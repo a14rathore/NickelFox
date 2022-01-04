@@ -9,6 +9,10 @@ import { HTTP_METHODS } from "./httpMethods";
 // ******************
 export const API = {
   AUTH: {
-    LOGIN: new Endpoint("/list", HTTP_METHODS.GET, "v2"),
+    LOGIN: new Endpoint("endpoint", HTTP_METHODS.POST)
   },
+  PRIVATE: {
+    GALLARY: new Endpoint("/list", HTTP_METHODS.GET, "v2")
+  }
 };
+

@@ -8,7 +8,5 @@ export class Response {
     this.error = error;
     this.message = error;
     this.code = code;
-
-    // console.log(this.data)
   }
 }

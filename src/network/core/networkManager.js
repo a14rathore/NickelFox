@@ -38,11 +38,9 @@ export class NetworkManager {
     let success = false;
     let code = 200;
     const state = Store.getState().app;
-    // console.log(this.baseUrl);
 
     try {
       const url = `${this.baseUrl}/${this.endPointVersion}${this.endpoint}${this.requestParams}`;
-      // console.log(url);
       const options = {
         method: this.method,
       };
@@ -61,15 +59,10 @@ export class NetworkManager {
       // execute fetch call & parse json response
       const res = await fetch(url, options);
       const response = await res.json();
-      // console.log(response)
       data = response;
-      // console.log(data)
       success = response.success;
-      // console.log(success)
       code = response.status_code;
-      // console.log(code)
       error = response.error;
-      // console.log(error)
 
 
       if (code === 401) {
