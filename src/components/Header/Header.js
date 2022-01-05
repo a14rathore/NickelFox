@@ -1,108 +1,40 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import React from 'react';
+import Style from './HeaderStyle.module.css';
 import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+import { useTheme } from './DarkModeContext';
+import { Link } from 'react-router-dom';
 
-export default function MenuAppBar({ bclr }) {
-    const [auth, setAuth] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [colour, setColour] = React.useState("inherit")
-
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-        if (event.target.checked) {
-            setColour("primary");
-            bclr({
-                stl: {
-                    backgroundColor: "black",
-                    color: "blue"
-                }
-            })
+function Header() {
+    const theme = useTheme();
+    const onChangeHandle = () => {
+        theme.setDarkmode((pre) => !pre)
+        if (!theme.darkmode) {
+            document.body.style.backgroundColor = "#805d88"
         } else {
-            setColour("inherit")
-            bclr({ stl: { colour: "black" } })
+            document.body.style.backgroundColor = "#FFFCDC"
         }
-    };
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
+    }
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <FormGroup>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={auth}
-                            onChange={handleChange}
-                            aria-label="login switch"
-                        />
-                    }
-                    label={auth ? 'DarkMode' : 'LightMode'}
-                />
-            </FormGroup>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color={colour}
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Photos
-                    </Typography>
-                    {auth && (
-                        <div>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color={colour}
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
-                </Toolbar>
-            </AppBar>
-        </Box>
-    );
+        <nav className={theme.darkmode ? Style.div2 : Style.div1}>
+            <ul>
+                <li><Link to='/auth/login'>Login</Link></li>
+                <li><Link to='/auth/signup'>SignUP</Link></li>
+                <li><Link to='/auth/counter'>Counter</Link></li>
+            </ul>
+            <div>
+                <label>
+                    {theme.darkmode ? <p>LightMode</p> : <p>DarkMode</p>}
+                    <Switch
+                        checked={theme.darkmode}
+                        name="loading"
+                        color="primary"
+                        onChange={onChangeHandle}
+                    />
+                </label>
+            </div>
+        </nav>
+    )
 }
+
+export default Header
