@@ -1,0 +1,43 @@
+.div1{
+    display: flex;
+    justify-content: space-between;
+    background-color: #EDD2F3;
+    width: 100vw;
+    padding: 5px;
+}
+.div2{
+    display: flex;
+    justify-content: space-between;
+    color: whitesmoke;
+    background-color: #644d69;
+    width: 100vw;
+    padding: 5px;
+}
+.div1 ul, .div2 ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    height: 3em;
+    width: 30vw;
+    align-items: center;
+
+}
+
+.div1 a, .div2 a{
+    background-color: #FFFCDC;
+    box-shadow: 1px 1px 5px black;;
+    border-radius: 8px;
+    padding:10px 1rem;
+    text-decoration: none;
+    color: black;
+    z-index: 10;
+}
+.div1 lable,.div2 lable{
+    margin: 0px 5em 0px 0px;
+}
+.div1 p,.div2 p{
+    float: left;
+    margin-top: 8px;
+    padding: 2px;
+    background-color: rgba(37, 255, 237, 0.459)
+}

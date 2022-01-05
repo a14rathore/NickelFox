@@ -8,6 +8,7 @@ import AppLoader from "@components/Loader/AppLoader";
 import PublicWrapper from "../hoc/PublicWrapper";
 import AuthWrapper from "../hoc/AuthWrapper";
 
+
 const Router = () => {
   const { isLogged } = useSelector((state) => state.app);
 

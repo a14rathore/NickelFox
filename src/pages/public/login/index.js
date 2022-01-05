@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AppDispatcher from "@redux/dispatchers/appDispatcher";
 import style from "../signup/signUp.module.css"
+import { context } from "@components/Header/DarkModeContext";
 
 
 const Login = () => {
@@ -8,6 +9,9 @@ const Login = () => {
     UserName: "",
     Password: "",
   })
+
+  const value = React.useContext(context)
+
   const inputHandler = (e) => {
     const { placeholder, value } = e.target;
     setLogindata({
@@ -29,20 +33,24 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <form className={style.form} onSubmit={getDataFromLocalStorage}>
+    <>
+      <form className={value.darkmode ? style.form1 : style.form} onSubmit={getDataFromLocalStorage}>
         <h1>Login Here</h1>
+        <br />
+        <hr />
         <div className={style.filled_div}>
           <label>UserName(Email)</label>
           <input type="email" required placeholder="UserName" value={logindata.UserName} onChange={inputHandler}></input>
+          <br />
           <label>Password</label>
           <input type="password" required placeholder="Password" value={logindata.Password} onChange={inputHandler}></input>
+          <br />
           <button className={style.Btn} type="onSubmit">Login</button>
-          <a className={style.Btn} href="/auth/signup">SignUp</a>
+          <br />
+          <a href="/auth/signup">SignUp</a>
         </div>
-
       </form>
-    </div >
+    </>
   );
 };
 

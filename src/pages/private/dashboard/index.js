@@ -21,7 +21,7 @@ function Dashboard() {
 
   const logout = () => {
     AppDispatcher.setUserLoggedOut();
-    window.location.pathname = "/auth/login";
+    window.location.path = "/auth/login";
   }
 
   const Item = styled(Paper)(({ theme }) => ({

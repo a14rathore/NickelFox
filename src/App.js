@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import AppRouter from "./router";
 import { Store, persistor } from "@redux";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { defaultTheme } from "./themes/defaultTheme";
+import DarkModeContext from "@components/Header/DarkModeContext";
 
 /**
  * @description Check if browser is Safar
@@ -18,13 +19,16 @@ if (window.safari) {
 }
 
 function App() {
+
   const currentTheme = createTheme(defaultTheme);
 
   return (
     <Provider store={Store}>
       <PersistGate persistor={persistor}>
         <ThemeProvider theme={currentTheme}>
-          <AppRouter />
+          <DarkModeContext>
+            <AppRouter />
+          </DarkModeContext>
         </ThemeProvider>
       </PersistGate>
     </Provider>
