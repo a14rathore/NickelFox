@@ -5,7 +5,7 @@ import AppRouter from "./router";
 import { Store, persistor } from "@redux";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { defaultTheme } from "./themes/defaultTheme";
-import DarkModeContext from "@components/Header/DarkModeContext";
+import DarkModeProvider from "@components/Header/DarkModeContext";
 
 /**
  * @description Check if browser is Safar
@@ -26,9 +26,9 @@ function App() {
     <Provider store={Store}>
       <PersistGate persistor={persistor}>
         <ThemeProvider theme={currentTheme}>
-          <DarkModeContext>
+          <DarkModeProvider>
             <AppRouter />
-          </DarkModeContext>
+          </DarkModeProvider>
         </ThemeProvider>
       </PersistGate>
     </Provider>

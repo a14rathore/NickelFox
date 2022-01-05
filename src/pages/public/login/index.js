@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AppDispatcher from "@redux/dispatchers/appDispatcher";
 import style from "../signup/signUp.module.css"
-import { context } from "@components/Header/DarkModeContext";
+import { useTheme } from "@components/Header/DarkModeContext";
 
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
     Password: "",
   })
 
-  const value = React.useContext(context)
+  const theme = useTheme()
 
   const inputHandler = (e) => {
     const { placeholder, value } = e.target;
@@ -34,7 +34,7 @@ const Login = () => {
 
   return (
     <>
-      <form className={value.darkmode ? style.form1 : style.form} onSubmit={getDataFromLocalStorage}>
+      <form className={theme.darkmode ? style.form1 : style.form} onSubmit={getDataFromLocalStorage}>
         <h1>Login Here</h1>
         <br />
         <hr />

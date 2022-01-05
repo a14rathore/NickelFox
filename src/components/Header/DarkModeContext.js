@@ -1,20 +1,17 @@
-import React, { useEffect, createContext } from "react";
+import React, { createContext } from "react";
 
-export const context = createContext();
+export const DarkModeTheme = createContext();
 
-function DarkModeContext(props) {
-    const [darkmode, setDarkmode] = React.useState(
-        localStorage.getItem('mode')
-            ? JSON.parse(localStorage.getItem('mode'))
-            : false)
-    useEffect(() => {
-        JSON.parse(localStorage.getItem('mode')) ? document.body.style.backgroundColor = '#8c6b94' : document.body.style.backgroundColor = 'white'
-    })
+
+
+function DarkModeProvider(props) {
+    const [darkmode, setDarkmode] = React.useState(false)
     return (
-        <context.Provider value={{ darkmode, setDarkmode }}>
+        <DarkModeTheme.Provider value={{ darkmode, setDarkmode }}>
             {props.children}
-        </context.Provider>
+        </DarkModeTheme.Provider>
     )
 }
 
-export default DarkModeContext
+export const useTheme = () => React.useContext(DarkModeTheme)
+export default DarkModeProvider

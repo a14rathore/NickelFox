@@ -1,4 +1,4 @@
-import { context } from "@components/Header/DarkModeContext";
+import { useTheme } from "@components/Header/DarkModeContext";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Style from './signUp.module.css';
@@ -13,7 +13,7 @@ const SignUp = () => {
 
   });
 
-  const { darkmode } = React.useContext(context)
+  const { darkmode } = useTheme();
   const History = useHistory();
   const localStorageData = localStorage.getItem("list")
   const userByEmail = localStorageData ? JSON.parse(localStorageData) : {};

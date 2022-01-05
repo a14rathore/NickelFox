@@ -1,26 +1,32 @@
 import React from 'react';
 import Style from './HeaderStyle.module.css';
 import Switch from '@mui/material/Switch';
-import { context } from './DarkModeContext';
+import { useTheme } from './DarkModeContext';
+import { Link } from 'react-router-dom';
 
 function Header() {
-    const value = React.useContext(context);
+    const theme = useTheme();
     const onChangeHandle = () => {
-        if (!value.darkmode) { localStorage.setItem('mode', true), value.setDarkmode(true); }
-        else { localStorage.setItem('mode', false), value.setDarkmode(false); }
+        theme.setDarkmode((pre) => !pre)
+        if (!theme.darkmode) {
+            document.body.style.backgroundColor = "#805d88"
+        } else {
+            document.body.style.backgroundColor = "#FFFCDC"
+        }
+
     }
     return (
-        <nav className={value.darkmode ? Style.div2 : Style.div1}>
+        <nav className={theme.darkmode ? Style.div2 : Style.div1}>
             <ul>
-                <li><a href='/auth/login'>Login</a></li>
-                <li><a href='/auth/signup'>SignUP</a></li>
-                <li><a href='/auth/counter'>Counter</a></li>
+                <li><Link to='/auth/login'>Login</Link></li>
+                <li><Link to='/auth/signup'>SignUP</Link></li>
+                <li><Link to='/auth/counter'>Counter</Link></li>
             </ul>
             <div>
                 <label>
-                    {value.darkmode ? <p>LightMode</p> : <p>DarkMode</p>}
+                    {theme.darkmode ? <p>LightMode</p> : <p>DarkMode</p>}
                     <Switch
-                        checked={value.darkmode}
+                        checked={theme.darkmode}
                         name="loading"
                         color="primary"
                         onChange={onChangeHandle}
